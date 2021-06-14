@@ -1,4 +1,4 @@
-;#NoTrayIcon
+#NoTrayIcon
 #include <MsgBoxConstants.au3>
 #include <StringConstants.au3>
 #include <File.au3>
@@ -46,8 +46,9 @@ Else
 
 
 Func _TelegramBot($IP,$Name, $Text)
+   ;MsgBox (0,"", _Time())
    $sText = _URIEncode($cText & ' ' & $Name & ', '& $IP & ', ' & $Text )
-   ConsoleWrite(InetRead('https://api.telegram.org/bot' & $sBotKey & '/sendMessage?chat_id=' & $nChatId & '&text=' & $sText,  0))
+   ConsoleWrite(InetRead('https://api.telegram.org/bot' & $sBotKey & '/sendMessage?chat_id=' & $nChatId & '&text=' & $sText & '&disable_notification=' & _Time(),  0))
 EndFunc
 
 Func _URIEncode($sData)
@@ -72,8 +73,8 @@ Func _URIEncode($sData)
  Local $time = Int((_NowTime(4)))
  if ($time < $minTime) Or ($time > $maxTime) Then
 
-	Return(1)
+	Return('True')
  Else
-	Return(0)
+	Return('False')
 	EndIf
  EndFunc
